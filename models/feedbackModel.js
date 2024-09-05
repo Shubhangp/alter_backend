@@ -12,7 +12,10 @@ const feedbackFormSchema = new Schema({
         default: Date.now(),
         select: false
     },
-    views: Number,
+    views:{
+        type: Number,
+        default: 0,
+    },
     formEntries: [Schema.Types.Mixed],
     userFeedbacks: [Schema.Types.Mixed]
 });
