@@ -6,7 +6,7 @@ const feedbackFormSchema = new mongoose.Schema({
     heading: String,
     published: Boolean,
     publishedDate: Date,
-    lastDate: Date,
+    lastDate: String,
     url: String,
     createdAt: {
         type: Date,
