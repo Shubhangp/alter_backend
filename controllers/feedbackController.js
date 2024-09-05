@@ -3,7 +3,6 @@ const APIFeatures = require('../utils/apiFeatures');
 
 exports.getAllForms = async (req, res) => {
     try{
-        // excute query
         const features = new APIFeatures(FeedbackForm.find(), req.query)
         .filter()
         .sort()
