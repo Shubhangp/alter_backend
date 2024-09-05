@@ -104,3 +104,38 @@ exports.updateForm = async (req, res) => {
         });
     }
 };
+
+exports.pushNewFeedback = async (req, res) => {
+    try {
+        const feedback = { 
+            formData: req.body.formData, 
+            feedbackDate: Date.now() 
+        };
+
+        const formData = await FeedbackForm.findByIdAndUpdate(
+            req.params.id, 
+            { $push: { userFeedbacks: feedback } },
+            { new: true, runValidators: true }
+        );
+
+        if (!formData) {
+            return res.status(404).json({
+                status: 'fail',
+                message: 'Form not found'
+            });
+        }
+
+        return res.status(200).json({
+            status: 'success',
+            data: {
+                formData
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(400).json({
+            status: 'fail',
+            message: err.message
+        });
+    }
+};
