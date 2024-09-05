@@ -139,3 +139,23 @@ exports.pushNewFeedback = async (req, res) => {
         });
     }
 };
+
+exports.updateFormView = async (req, res) => {
+    try{
+        const formData = await FeedbackForm.findById(req.params.id);
+
+    if (!formData) {
+      return res.status(404).json({ message: 'Form not found' });
+    }
+
+    formData.views += 1;
+    await formData.save();
+
+    res.json({ views: formData.views });
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err.message
+        })
+    }
+}
